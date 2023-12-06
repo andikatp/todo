@@ -8,28 +8,39 @@ import {
   Pressable,
   TextInput,
   Alert,
+  TouchableHighlight,
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { onSignIn } from "../redux/reducers/auth.js";
-
+import { useDispatch } from "react-redux";
+import { afterLogin, onSignIn } from "../redux/reducers/auth.js";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
+import { supabase } from "../libs/supabase.js";
+import alert from "../helpers/alert.js";
+import { navigator } from "../routes/appRoute.js";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.auth.isLoading);
 
-  const onLoginPressed = async () => {
+  const onLoginPressed = () => {
     validator();
-    dispatch(
-      onSignIn({
-        email: email.value,
-        password: password.value,
+    dispatch(onSignIn({ email: email.value, password: password.value }))
+      .unwrap()
+      .then((x) => {
+        const { data, error } = x;
+        if (error) {
+          console.error("Unexpected error:", error);
+          alert(error);
+        } else {
+          dispatch(afterLogin({ email: email.value }));
+          navigation.navigate(navigator);
+        }
       })
-    );
-    navigation.navigate("Navigator");
+      .catch((error) => {
+        console.error("Unexpected error:", error);
+        alert(error);
+      });
   };
 
   const validator = () => {
@@ -89,6 +100,8 @@ const LoginScreen = ({ navigation }) => {
             borderRadius: 10,
             fontSize: 17,
           }}
+          placeholder="Password"
+          placeholderTextColor="#9fa0a1"
           label="Password"
           returnKeyType="done"
           value={password.value}
@@ -97,7 +110,7 @@ const LoginScreen = ({ navigation }) => {
           errorText={password.error}
           secureTextEntry
         />
-        <Pressable
+        <TouchableHighlight
           style={{
             backgroundColor: "#FF5555",
             padding: 15,
@@ -116,7 +129,7 @@ const LoginScreen = ({ navigation }) => {
           >
             LOGIN
           </Text>
-        </Pressable>
+        </TouchableHighlight>
         <Text
           style={{
             textAlign: "center",
@@ -137,5 +150,7 @@ const LoginScreen = ({ navigation }) => {
     </View>
   );
 };
+
+const style = StyleSheet.create({});
 
 export default LoginScreen;
