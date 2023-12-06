@@ -26,11 +26,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "557194e2-62fe-4d9d-888f-4ca46278ef0b"
-      }
-    },
     "owner": "wira1997",
     "scripts": {
       "android": "adb shell input keyevent 82"
