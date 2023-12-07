@@ -2,26 +2,21 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Button,
   Image,
   StyleSheet,
-  Pressable,
   TextInput,
-  Alert,
+  Pressable,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { onSignUp } from "../redux/reducers/auth.js";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import { nameValidator } from "../helpers/nameValidator";
-
-import { useDispatch } from "react-redux";
-import { onSignUp } from "../redux/reducers/auth.js";
-import { supabase } from "../libs/supabase";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const onSignUpPressed = async () => {
@@ -54,27 +49,14 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={{ padding: "1rem" }}>
+    <View style={styles.container}>
       <View>
-        <Image
-          source={require("../assets/img2.png")}
-          style={{ width: 300, height: 200, alignSelf: "center" }}
-        />
+        <Image source={require("../assets/img2.png")} style={styles.image} />
       </View>
-      <Text style={{ marginTop: "1rem", fontSize: 30, fontWeight: "bold" }}>
-        Register
-      </Text>
+      <Text style={styles.title}>Register</Text>
       <View>
         <TextInput
-          style={{
-            backgroundColor: "#cfd0d1",
-            marginTop: "1rem",
-            padding: 15,
-            borderwidth: "5px",
-            borderColor: "gray",
-            borderRadius: 10,
-            fontSize: 17,
-          }}
+          style={styles.input}
           placeholder="Email"
           placeholderTextColor="#9fa0a1"
           label="Email"
@@ -89,16 +71,7 @@ const RegisterScreen = ({ navigation }) => {
           keyboardType="email-address"
         />
         <TextInput
-          style={{
-            backgroundColor: "#cfd0d1",
-            marginTop: 15,
-            borderRadius: "15",
-            padding: 15,
-            borderwidth: "5px",
-            borderColor: "gray",
-            borderRadius: 10,
-            fontSize: 17,
-          }}
+          style={styles.input}
           placeholder="Name"
           placeholderTextColor="#9fa0a1"
           label="Name"
@@ -109,17 +82,8 @@ const RegisterScreen = ({ navigation }) => {
           errorText={name.error}
         />
         <TextInput
-          style={{
-            backgroundColor: "#cfd0d1",
-            marginTop: 15,
-            borderRadius: "15",
-            padding: 15,
-            borderwidth: "5px",
-            borderColor: "gray",
-            borderRadius: 10,
-            fontSize: 17,
-          }}
-          placeholder=" Password"
+          style={styles.input}
+          placeholder="Password"
           placeholderTextColor="#9fa0a1"
           label="Password"
           returnKeyType="done"
@@ -129,38 +93,13 @@ const RegisterScreen = ({ navigation }) => {
           errorText={password.error}
           secureTextEntry
         />
-        <Pressable
-          style={{
-            backgroundColor: "#FF5555",
-            padding: 15,
-            borderRadius: 10,
-            marginTop: "2rem",
-          }}
-          onPress={onSignUpPressed}
-        >
-          <Text
-            style={{
-              color: "white",
-              textAlign: "center",
-              fontWeight: "bold",
-              fontSize: 17,
-            }}
-          >
-            REGISTER
-          </Text>
+        <Pressable style={styles.registerButton} onPress={onSignUpPressed}>
+          <Text style={styles.buttonText}>REGISTER</Text>
         </Pressable>
-        <Text
-          style={{
-            textAlign: "center",
-            marginTop: 10,
-            fontSize: 15,
-            fontWeight: "bold",
-          }}
-        >
+        <Text style={styles.loginText}>
           <Text>Join Us Before?</Text>
           <Text
-            style={{ color: "#FF5555", marginLeft: 5 }}
-            disabled={loading}
+            style={styles.loginLink}
             onPress={() => navigation.navigate("LoginPage")}
           >
             Login
@@ -170,5 +109,52 @@ const RegisterScreen = ({ navigation }) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: "1rem",
+  },
+  image: {
+    width: 300,
+    height: 200,
+    alignSelf: "center",
+  },
+  title: {
+    marginTop: "1rem",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  input: {
+    backgroundColor: "#cfd0d1",
+    marginTop: "1rem",
+    padding: 15,
+    borderWidth: 5,
+    borderColor: "gray",
+    borderRadius: 10,
+    fontSize: 17,
+  },
+  registerButton: {
+    backgroundColor: "#FF5555",
+    padding: 15,
+    borderRadius: 10,
+    marginTop: "2rem",
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 17,
+  },
+  loginText: {
+    textAlign: "center",
+    marginTop: 10,
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+  loginLink: {
+    color: "#FF5555",
+    marginLeft: 5,
+  },
+});
 
 export default RegisterScreen;

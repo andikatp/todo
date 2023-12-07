@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Button,
   Image,
   StyleSheet,
-  Pressable,
   TextInput,
-  Alert,
   TouchableHighlight,
 } from "react-native";
 import { useDispatch } from "react-redux";
@@ -54,28 +51,14 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={{ padding: "1rem" }}>
+    <View style={styles.container}>
       <View>
-        <Image
-          source={require("../assets/img2.png")}
-          style={{ width: 300, height: 200, alignSelf: "center" }}
-        />
+        <Image source={require("../assets/img2.png")} style={styles.image} />
       </View>
-      <Text style={{ marginTop: "2rem", fontSize: 30, fontWeight: "bold" }}>
-        Login
-      </Text>
+      <Text style={styles.title}>Login</Text>
       <View>
         <TextInput
-          style={{
-            backgroundColor: "#cfd0d1",
-            marginTop: "3rem",
-            borderRadius: "15",
-            padding: 15,
-            borderwidth: "5px",
-            borderColor: "gray",
-            borderRadius: 10,
-            fontSize: 17,
-          }}
+          style={styles.input}
           placeholder="Email"
           placeholderTextColor="#9fa0a1"
           label="Email"
@@ -90,16 +73,7 @@ const LoginScreen = ({ navigation }) => {
           keyboardType="email-address"
         />
         <TextInput
-          style={{
-            backgroundColor: "#cfd0d1",
-            marginTop: 15,
-            borderRadius: "15",
-            padding: 15,
-            borderwidth: "5px",
-            borderColor: "gray",
-            borderRadius: 10,
-            fontSize: 17,
-          }}
+          style={styles.input}
           placeholder="Password"
           placeholderTextColor="#9fa0a1"
           label="Password"
@@ -110,37 +84,13 @@ const LoginScreen = ({ navigation }) => {
           errorText={password.error}
           secureTextEntry
         />
-        <TouchableHighlight
-          style={{
-            backgroundColor: "#FF5555",
-            padding: 15,
-            borderRadius: 10,
-            marginTop: "2rem",
-          }}
-          onPress={onLoginPressed}
-        >
-          <Text
-            style={{
-              color: "white",
-              textAlign: "center",
-              fontWeight: "bold",
-              fontSize: 17,
-            }}
-          >
-            LOGIN
-          </Text>
+        <TouchableHighlight style={styles.loginButton} onPress={onLoginPressed}>
+          <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableHighlight>
-        <Text
-          style={{
-            textAlign: "center",
-            marginTop: 10,
-            fontSize: 15,
-            fontWeight: "bold",
-          }}
-        >
+        <Text style={styles.registerText}>
           <Text>New Users?</Text>
           <Text
-            style={{ color: "#FF5555", marginLeft: 5 }}
+            style={styles.registerLink}
             onPress={() => navigation.navigate("RegisterPage")}
           >
             Register
@@ -151,6 +101,51 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-const style = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: "1rem",
+  },
+  image: {
+    width: 300,
+    height: 200,
+    alignSelf: "center",
+  },
+  title: {
+    marginTop: "2rem",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  input: {
+    backgroundColor: "#cfd0d1",
+    marginTop: "3rem",
+    borderRadius: 10,
+    padding: 15,
+    borderWidth: 5,
+    borderColor: "gray",
+    fontSize: 17,
+  },
+  loginButton: {
+    backgroundColor: "#FF5555",
+    padding: 15,
+    borderRadius: 10,
+    marginTop: "2rem",
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 17,
+  },
+  registerText: {
+    textAlign: "center",
+    marginTop: 10,
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+  registerLink: {
+    color: "#FF5555",
+    marginLeft: 5,
+  },
+});
 
 export default LoginScreen;

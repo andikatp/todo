@@ -1,64 +1,32 @@
 import React from "react";
-import { View, Text, Button, Image, StyleSheet, Pressable } from "react-native";
+import { View, Text, Image, StyleSheet, Pressable } from "react-native";
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <View>
-      <View style={styles.container}>
-        <Image
-          style={{ width: 300, height: 300 }}
-          source={require("../assets/img1.png")}
-        />
-        <Text style={{ fontSize: "50px", fontWeight: "bold" }}>
-          Ways <Text style={{ color: "#B82020" }}>To</Text>
-          <Text style={{ color: "#FF5555" }}>DO</Text>
-        </Text>
-        <Text style={{ marginTop: "1rem" }}>
-          Write your activity and finish your activity.
-        </Text>
-        <Text>Fast, Simple and Easy to Use.</Text>
-      </View>
-      <View style={{ marginTop: "3rem" }}>
+    <View style={styles.container}>
+      <Image style={styles.image} source={require("../assets/img1.png")} />
+      <Text style={styles.title}>
+        Ways <Text style={styles.redText}>To</Text>
+        <Text style={styles.orangeText}>DO</Text>
+      </Text>
+      <Text style={styles.subtitle}>
+        Write your activity and finish your activity.
+      </Text>
+      <Text style={styles.description}>Fast, Simple and Easy to Use.</Text>
+
+      <View style={styles.buttonsContainer}>
         <Pressable
-          style={{
-            backgroundColor: "#FF5555",
-            marginHorizontal: 60,
-            padding: 9,
-            borderRadius: 10,
-          }}
+          style={styles.loginButton}
           onPress={() => navigation.navigate("LoginPage")}
         >
-          <Text
-            style={{
-              color: "white",
-              textAlign: "center",
-              fontWeight: "bold",
-              fontSize: "15px",
-            }}
-          >
-            LOGIN
-          </Text>
+          <Text style={styles.buttonText}>LOGIN</Text>
         </Pressable>
+
         <Pressable
-          style={{
-            backgroundColor: "#575859",
-            marginHorizontal: 60,
-            padding: 9,
-            borderRadius: 10,
-            marginTop: 10,
-          }}
+          style={styles.registerButton}
+          onPress={() => navigation.navigate("RegisterPage")}
         >
-          <Text
-            style={{
-              color: "white",
-              textAlign: "center",
-              fontWeight: "bold",
-              fontSize: "15px",
-            }}
-            onPress={() => navigation.navigate("RegisterPage")}
-          >
-            REGISTER
-          </Text>
+          <Text style={styles.buttonText}>REGISTER</Text>
         </Pressable>
       </View>
     </View>
@@ -68,14 +36,51 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: "relative",
     alignItems: "center",
+    justifyContent: "center",
   },
-  centeredText: {
-    position: "absolute",
+  image: {
+    width: 300,
+    height: 300,
   },
-  button: {
-    width: 200,
+  title: {
+    fontSize: 50,
+    fontWeight: "bold",
+    marginTop: 10,
+  },
+  redText: {
+    color: "#B82020",
+  },
+  orangeText: {
+    color: "#FF5555",
+  },
+  subtitle: {
+    marginTop: 10,
+  },
+  description: {
+    marginTop: 5,
+  },
+  buttonsContainer: {
+    marginTop: 30,
+  },
+  loginButton: {
+    backgroundColor: "#FF5555",
+    marginHorizontal: 60,
+    padding: 9,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  registerButton: {
+    backgroundColor: "#575859",
+    marginHorizontal: 60,
+    padding: 9,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 15,
   },
 });
 
