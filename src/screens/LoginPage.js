@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     marginTop: "3rem",
     borderRadius: 10,
     padding: 15,
-    borderWidth: 5,
+    borderWidth: 1,
     borderColor: "gray",
     fontSize: 17,
   },
