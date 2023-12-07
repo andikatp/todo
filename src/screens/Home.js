@@ -62,19 +62,20 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     marginTop: 30,
+    width: "80%",
   },
   loginButton: {
     backgroundColor: "#FF5555",
-    marginHorizontal: 60,
-    padding: 9,
+    padding: 10,
     borderRadius: 10,
     marginBottom: 10,
+    width: "100%",
   },
   registerButton: {
     backgroundColor: "#575859",
-    marginHorizontal: 60,
-    padding: 9,
+    padding: 10,
     borderRadius: 10,
+    width: "100%",
   },
   buttonText: {
     color: "white",
