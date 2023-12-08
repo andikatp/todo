@@ -9,19 +9,31 @@ const initialState = {
 
 export const onSignUp = createAsyncThunk(
   "signup",
-  async ({ name, email, password }) => {
+  async ({ email, password }) => {
     try {
-      await supabase.auth.signUp({
+      const data = await supabase.auth.signUp({
         email,
         password,
       });
+      return data;
+    } catch (error) {
+      console.log(error.msg);
+      throw error.msg;
+    }
+  }
+);
+
+export const afterSignUp = createAsyncThunk(
+  "afterSignUp",
+  async ({ name, email, password }) => {
+    try {
       await supabase.from("pengguna").insert({
         name: name,
         email: email,
         password: password,
       });
+      return data;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   }
@@ -42,7 +54,7 @@ export const onSignIn = createAsyncThunk(
   }
 );
 
-export const afterLogin = createAsyncThunk("afterLogin", async ({email}) => {
+export const afterLogin = createAsyncThunk("afterLogin", async ({ email }) => {
   try {
     console.log("afterLogi");
     const data = await supabase
@@ -50,7 +62,7 @@ export const afterLogin = createAsyncThunk("afterLogin", async ({email}) => {
       .select("*")
       .eq("email", email)
       .single();
-      console.log(data);
+    console.log(data);
     return data;
   } catch (error) {
     throw error;

@@ -11,7 +11,6 @@ import { useDispatch } from "react-redux";
 import { afterLogin, onSignIn } from "../redux/reducers/auth.js";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
-import { supabase } from "../libs/supabase.js";
 import alert from "../helpers/alert.js";
 import { navigator } from "../routes/appRoute.js";
 
@@ -25,7 +24,7 @@ const LoginScreen = ({ navigation }) => {
     dispatch(onSignIn({ email: email.value, password: password.value }))
       .unwrap()
       .then((x) => {
-        const { data, error } = x;
+        const { error } = x;
         if (error) {
           console.error("Unexpected error:", error);
           alert(error);

@@ -8,10 +8,12 @@ import {
   Pressable,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import { onSignUp } from "../redux/reducers/auth.js";
+import { afterSignUp, onSignUp } from "../redux/reducers/auth.js";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import { nameValidator } from "../helpers/nameValidator";
+import { supabase } from "../libs/supabase.js";
+import { login } from "../routes/appRoute.js";
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState({ value: "", error: "" });
@@ -20,20 +22,32 @@ const RegisterScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const onSignUpPressed = async () => {
-    try {
-      validators();
-      dispatch(
-        onSignUp({
-          name: name.value,
-          email: email.value,
-          password: password.value,
-        })
-      );
-      navigation.navigate("LoginPage");
-    } catch (error) {
-      console.error("Error during sign up:", error);
-      Alert.alert(error);
-    }
+    validators();
+    dispatch(
+      onSignUp({
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      })
+    )
+      .unwrap()
+      .then((x) => {
+        const { error } = x;
+        if (error) {
+          console.error("Unexpected error:", error);
+          alert(error);
+        } else {
+          dispatch(
+            afterSignUp({
+              name: name.value,
+              email: email.value,
+              password: password.value,
+            })
+          );
+          navigation.navigate(login);
+        }
+      })
+      .catch((e) => console.log(e));
   };
 
   const validators = () => {

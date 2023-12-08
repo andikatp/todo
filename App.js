@@ -16,7 +16,7 @@ const App = () => {
     <ReduxProvider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Navigator"
+          initialRouteName="Home"
           screenOptions={{
             headerShown: false,
           }}
