@@ -107,9 +107,9 @@ const RegisterScreen = ({ navigation }) => {
           errorText={password.error}
           secureTextEntry
         />
-        <Pressable style={styles.registerButton} onPress={onSignUpPressed}>
+        <TouchableHighlight style={styles.registerButton} onPress={onSignUpPressed}>
           <Text style={styles.buttonText}>REGISTER</Text>
-        </Pressable>
+        </TouchableHighlight>
         <Text style={styles.loginText}>
           <Text>Join Us Before?</Text>
           <Text
