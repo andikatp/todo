@@ -15,19 +15,19 @@ const HomeScreen = ({ navigation }) => {
       <Text style={styles.description}>Fast, Simple and Easy to Use.</Text>
 
       <View style={styles.buttonsContainer}>
-        <Pressable
+        <TouchableHighlight
           style={styles.loginButton}
           onPress={() => navigation.navigate("LoginPage")}
         >
           <Text style={styles.buttonText}>LOGIN</Text>
-        </Pressable>
+        </TouchableHighlight>
 
-        <Pressable
+        <TouchableHighlight
           style={styles.registerButton}
           onPress={() => navigation.navigate("RegisterPage")}
         >
           <Text style={styles.buttonText}>REGISTER</Text>
-        </Pressable>
+        </TouchableHighlight>
       </View>
     </View>
   );
