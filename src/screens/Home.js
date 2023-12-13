@@ -13,7 +13,6 @@ const HomeScreen = ({ navigation }) => {
         Write your activity and finish your activity.
       </Text>
       <Text style={styles.description}>Fast, Simple and Easy to Use.</Text>
-
       <View style={styles.buttonsContainer}>
         <TouchableHighlight
           style={styles.loginButton}
