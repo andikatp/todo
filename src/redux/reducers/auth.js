@@ -56,13 +56,11 @@ export const onSignIn = createAsyncThunk(
 
 export const afterLogin = createAsyncThunk("afterLogin", async ({ email }) => {
   try {
-    console.log("afterLogi");
     const data = await supabase
       .from("pengguna")
       .select("*")
       .eq("email", email)
       .single();
-    console.log(data);
     return data;
   } catch (error) {
     throw error;
