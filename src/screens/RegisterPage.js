@@ -5,7 +5,6 @@ import {
   Image,
   StyleSheet,
   TextInput,
-  Pressable,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { afterSignUp, onSignUp } from "../redux/reducers/auth.js";
