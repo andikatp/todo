@@ -11,7 +11,6 @@ import { afterSignUp, onSignUp } from "../redux/reducers/auth.js";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import { nameValidator } from "../helpers/nameValidator";
-import { supabase } from "../libs/supabase.js";
 import { login } from "../routes/appRoute.js";
 
 const RegisterScreen = ({ navigation }) => {
