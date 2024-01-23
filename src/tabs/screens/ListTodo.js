@@ -15,8 +15,6 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from "react-redux";
 import { supabase } from "../../libs/supabase";
 
-// import logo from "../../assets/logo.png";
-
 const List = ({ navigation }) => {
   const [selectedValue, setSelectedValue] = useState(null);
   const [isSelected1, setSelection1] = useState(false);
